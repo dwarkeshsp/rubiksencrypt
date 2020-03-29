@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 
 export default function Cube({ message }) {
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
@@ -64,13 +64,13 @@ const generateCube = message => {
         message[5 * size * size + i * size + j],
         "yellow"
       );
-      const black = Sticker("", "#303030");
-      cube[i][j] = black;
-      cube[i][j + 2 * size] = black;
-      cube[i][j + 3 * size] = black;
-      cube[i + 2 * size][j] = black;
-      cube[i + 2 * size][j + 2 * size] = black;
-      cube[i + 2 * size][j + 3 * size] = black;
+      const empty = Sticker("", "#303030");
+      cube[i][j] = empty;
+      cube[i][j + 2 * size] = empty;
+      cube[i][j + 3 * size] = empty;
+      cube[i + 2 * size][j] = empty;
+      cube[i + 2 * size][j + 2 * size] = empty;
+      cube[i + 2 * size][j + 3 * size] = empty;
     }
   }
   return cube;
