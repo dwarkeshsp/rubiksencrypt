@@ -1,10 +1,13 @@
 import { Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import useWindowDimensions from "./useWindowDimensions";
 
 export default function Cube({ message }) {
-  const size = Math.ceil(Math.sqrt(message.length / 6.0));
-
   const [cube, setCube] = useState([[]]);
+  const { height, width } = useWindowDimensions();
+  const size = Math.ceil(Math.sqrt(message.length / 6.0));
+  const stickerSize = width / (size * 5);
+  const stickerTopPadding = stickerSize / 2 - 10;
 
   useEffect(() => setCube(generateCube(message)), [message]);
 
@@ -12,17 +15,19 @@ export default function Cube({ message }) {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: `repeat(${size * 4}, 20px)`
+        gridTemplateColumns: `repeat(${size * 4}, ${stickerSize}px)`,
+        justifyContent: "center"
       }}
     >
       {cube.map(row =>
         row.map(col => (
           <div
             style={{
-              width: 20,
-              height: 20,
+              width: stickerSize,
+              height: stickerSize,
               backgroundColor: col[0].color,
-              border: "solid 1px #303030"
+              border: "solid 1px #303030",
+              paddingTop: `${stickerTopPadding}px`
             }}
           >
             <Typography align="center" color="textSecondary">
@@ -43,7 +48,6 @@ const generateCube = message => {
     for (let j = 0; j < size; j++) {
       const Sticker = (char, color) => [{ char: char, color: color }];
       cube[i][j + size] = Sticker(message[i * size + j], "white");
-      console.log(i + size, j);
       cube[i + size][j] = Sticker(
         message[size * size + i * size + j],
         "orange"
