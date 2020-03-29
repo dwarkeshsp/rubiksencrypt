@@ -2,9 +2,9 @@ import { Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import useWindowDimensions from "./useWindowDimensions";
 
-export default function Cube({ message }) {
+export default function Cube({ message, running, key }) {
   const [cube, setCube] = useState([[]]);
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
   const stickerSize = width / (size * 5);
   const stickerTopPadding = stickerSize / 2 - 10;

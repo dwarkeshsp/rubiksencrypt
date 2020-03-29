@@ -1,5 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import blue from "@material-ui/core/colors/blue";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -8,6 +9,7 @@ import * as serviceWorker from "./serviceWorker";
 const darkTheme = createMuiTheme({
   palette: {
     type: "dark",
+    primary: blue,
     text: {
       secondary: "#303030"
     }
