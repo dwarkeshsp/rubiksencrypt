@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Typography } from "@material-ui/core";
 
 export default function Cube({ message }) {
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
@@ -14,18 +15,19 @@ export default function Cube({ message }) {
         gridTemplateColumns: `repeat(${size * 4}, 20px)`
       }}
     >
-      {cube.map((row, i) =>
-        row.map((col, k) => (
+      {cube.map(row =>
+        row.map(col => (
           <div
-            // key={`${i}-${k}`}
             style={{
               width: 20,
               height: 20,
               backgroundColor: col[0].color,
-              border: "solid 1px black"
+              border: "solid 1px #303030"
             }}
           >
-            {col[0].char}
+            <Typography align="center" color="textSecondary">
+              {col[0].char}
+            </Typography>
           </div>
         ))
       )}
@@ -40,7 +42,6 @@ const generateCube = message => {
   for (let i = 0; i < size; i++) {
     for (let j = 0; j < size; j++) {
       const Sticker = (char, color) => [{ char: char, color: color }];
-
       cube[i][j + size] = Sticker(message[i * size + j], "white");
       console.log(i + size, j);
       cube[i + size][j] = Sticker(
@@ -57,15 +58,20 @@ const generateCube = message => {
       );
       cube[i + size][j + 3 * size] = Sticker(
         message[4 * size * size + i * size + j],
-        "blue"
+        "royalblue"
       );
       cube[i + 2 * size][j + size] = Sticker(
         message[5 * size * size + i * size + j],
         "yellow"
       );
+      const black = Sticker("", "#303030");
+      cube[i][j] = black;
+      cube[i][j + 2 * size] = black;
+      cube[i][j + 3 * size] = black;
+      cube[i + 2 * size][j] = black;
+      cube[i + 2 * size][j + 2 * size] = black;
+      cube[i + 2 * size][j + 3 * size] = black;
     }
   }
-  console.table(cube);
-
   return cube;
 };
