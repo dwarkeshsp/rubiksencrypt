@@ -7,9 +7,13 @@ export default function Cube({ message, running, key }) {
   const { width } = useWindowDimensions();
   const size = Math.ceil(Math.sqrt(message.length / 6.0));
   const stickerSize = width / (size * 5);
-  const stickerTopPadding = stickerSize / 2 - 10;
+  const stickerTopPadding = stickerSize / 2 - 20;
 
   useEffect(() => setCube(generateCube(message)), [message]);
+
+  useEffect(() => {
+    while (running) {}
+  }, [running]);
 
   return (
     <div
@@ -30,7 +34,7 @@ export default function Cube({ message, running, key }) {
               paddingTop: `${stickerTopPadding}px`
             }}
           >
-            <Typography align="center" color="textSecondary">
+            <Typography align="center" variant="h6" color="textSecondary">
               {col[0].char}
             </Typography>
           </div>

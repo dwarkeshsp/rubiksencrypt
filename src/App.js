@@ -21,7 +21,7 @@ function App() {
     <div>
       <CssBaseline />
       <Container
-        maxWidth="md"
+        maxWidth="sm"
         style={{ paddingTop: "2.5rem", paddingBottom: "2.5rem" }}
       >
         <Typography align="center" variant="h2">
@@ -34,6 +34,7 @@ function App() {
           }}
           onChange={e => setMessage(e.target.value)}
           placeholder="Your message..."
+          variant="outlined"
           multiline
           fullWidth
         />
@@ -50,6 +51,7 @@ function App() {
         )}
         <Grid container justify="center">
           <FormControlLabel
+            style={{ paddingRight: "2rem" }}
             control={
               <Switch
                 checked={encrypt}
@@ -62,7 +64,7 @@ function App() {
           <Button
             color={running ? "secondary" : "primary"}
             onClick={() => setRunning(!running)}
-            disabled={message.length <= 6 && (encrypt || key.length > 240)}
+            disabled={message.length <= 6 || (!encrypt && key.length < 240)}
             variant="contained"
           >
             {running ? "Stop" : "Start"}
