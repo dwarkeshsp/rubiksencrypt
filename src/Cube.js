@@ -12,7 +12,7 @@ export default function Cube({ message, running, key }) {
   useEffect(() => setCube(generateCube(message)), [message]);
 
   useEffect(() => {
-    while (running) {}
+    // while (running) {}
   }, [running]);
 
   return (
